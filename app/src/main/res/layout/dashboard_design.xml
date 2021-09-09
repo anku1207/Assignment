@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:orientation="horizontal"
         android:padding="10dp">
         <LinearLayout
@@ -17,7 +17,7 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_launcher_background"
                 android:layout_gravity="center"/>
@@ -52,7 +52,7 @@
             android:layout_gravity="center"
             android:gravity="center">
             <ImageView
-                android:layout_width="50dp"
+                android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/more"
                 android:layout_gravity="center"/>
@@ -67,14 +67,11 @@
         android:textSize="12dp"
         android:textColor="@android:color/black"/>
     
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="300dp">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/singleImageview"/>
-    </LinearLayout>
+        android:layout_height="300dp"
+        android:id="@+id/recyclerView">
+    </androidx.recyclerview.widget.RecyclerView>
     
     
     

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ResponseVO(
     @field:SerializedName("data")
-    val data: List<GalleryVO>? = null,
+    val data: ArrayList<GalleryVO>? = null,
 
     @field:SerializedName("message")
     val message: String? = null,
@@ -18,7 +18,7 @@ data class ResponseVO(
 
 data class GalleryVO(
     @field:SerializedName("GALLERY")
-    val GALLERY: List<GalleryDataVO>? = null,
+    val GALLERY: ArrayList<GalleryDataVO>? = null,
 )
 
 data class GalleryDataVO(

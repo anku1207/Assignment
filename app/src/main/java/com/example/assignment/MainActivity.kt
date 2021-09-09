@@ -37,12 +37,9 @@ class MainActivity : AppCompatActivity() {
         mainActivityViewModel.getDashboardData().observe(this, Observer {
             when(it.status){
                 Status.LOADING-> {
-
                 }
                 Status.ERROR-> {
-
                 }
-
                 Status.SUCCESS-> {
                     if(it.data?.code==200){
                         it.data.data?.let { it1 ->

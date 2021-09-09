@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.assignment.R
 import com.example.assignment.model.GalleryDataVO
@@ -20,7 +21,7 @@ import java.nio.file.Paths.get
 
 class MainActivityAdapter(val context: Context ,val dataList : ArrayList<GalleryVO>) : RecyclerView.Adapter<MainActivityAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var singleImageview : ImageView =itemView.findViewById(R.id.singleImageview)
+        var recyclerView : RecyclerView =itemView.findViewById(R.id.recyclerView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,14 +29,17 @@ class MainActivityAdapter(val context: Context ,val dataList : ArrayList<Gallery
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var galleryDataVO :GalleryDataVO? = dataList[position].GALLERY?.get(0)
-        Picasso.get().load(galleryDataVO!!.filename).fit().centerCrop()
-            .into(holder.singleImageview);
-
-
+        val galleryDataVO  = dataList[position].GALLERY
+        val listImageAdapter =ListImageAdapter(context,galleryDataVO!!)
+        holder.recyclerView.apply {
+            layoutManager= GridLayoutManager(this.context,if(galleryDataVO.size>2) 2 else galleryDataVO.size)
+            adapter=listImageAdapter
+        }
     }
 
     override fun getItemCount(): Int {
+
         return dataList.size
     }
 }
+
