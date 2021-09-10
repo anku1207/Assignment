@@ -12,12 +12,14 @@ import kotlinx.coroutines.Dispatchers
 import java.lang.Exception
 
 class MainActivityViewModel:ViewModel() {
-    fun getDashboardData():LiveData<Resource<ResponseVO>> = liveData(Dispatchers.IO) {
-        emit(Resource.loading(null))
-        try {
-          emit(Resource.success(MainActivityRepository().getDashBoardData()))
-        }catch (e : Exception){
-            emit(Resource.error(e.message.toString(),MainActivityRepository().getDashBoardData()))
+    fun getDashboardData():LiveData<Resource<ResponseVO>> {
+       return liveData(Dispatchers.IO) {
+            emit(Resource.loading(null))
+            try {
+                emit(Resource.success(MainActivityRepository().getDashBoardData()))
+            }catch (e : Exception){
+                emit(Resource.error(e.message.toString(),MainActivityRepository().getDashBoardData()))
+            }
         }
     }
 }
