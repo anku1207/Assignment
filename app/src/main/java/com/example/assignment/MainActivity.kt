@@ -3,6 +3,8 @@ package com.example.assignment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var recyclerView :RecyclerView
     lateinit var mainActivityAdapter: MainActivityAdapter
     lateinit var dataList :ArrayList<GalleryVO>
+    lateinit var progress_bar :ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
 
         recyclerView=findViewById(R.id.recyclerView)
+        progress_bar=findViewById(R.id.progress_bar)
         dataList= ArrayList()
 
         recyclerView.layoutManager=LinearLayoutManager(this)
@@ -37,10 +41,13 @@ class MainActivity : AppCompatActivity() {
         mainActivityViewModel.getDashboardData().observe(this, Observer {
             when(it.status){
                 Status.LOADING-> {
+                    progress_bar.visibility=View.VISIBLE
                 }
                 Status.ERROR-> {
+                    progress_bar.visibility=View.GONE
                 }
                 Status.SUCCESS-> {
+                    progress_bar.visibility=View.GONE
                     if(it.data?.code==200){
                         it.data.data?.let { it1 ->
                             for (GALLERY in it1){

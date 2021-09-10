@@ -6,21 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.assignment.R
 import com.example.assignment.model.GalleryDataVO
 import com.squareup.picasso.Picasso
 
 class ListImageAdapter(context: Context) :RecyclerView.Adapter<ListImageAdapter.ViewHolder>(){
-    var dataList : ArrayList<GalleryDataVO> = ArrayList()
+    var showDataList : ArrayList<GalleryDataVO> = ArrayList()
     var context: Context = context
 
-    constructor(context: Context ,dataList : ArrayList<GalleryDataVO>): this(context) {
-        this.dataList=dataList
+    constructor(context: Context ,dataList : ArrayList<GalleryDataVO> ,fullDataList : ArrayList<GalleryDataVO>): this(context) {
+        this.showDataList=dataList
     }
 
-    object m{
+    companion object{
         fun dpToPx(dp: Int, context: Context): Int {
             val density = context.resources.displayMetrics.density
             return Math.round(dp.toFloat() * density)
@@ -30,9 +30,10 @@ class ListImageAdapter(context: Context) :RecyclerView.Adapter<ListImageAdapter.
    inner class ViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
         val imageview :ImageView =itemView.findViewById(R.id.list_image)
         var listLayout: LinearLayout = itemView.findViewById(R.id.listLayout)
+        var imagetext :TextView = itemView.findViewById(R.id.imagetext)
         init {
-            if(dataList.size>2){
-                listLayout.layoutParams.height = m.dpToPx(150 , context)
+            if(showDataList.size>2){
+                listLayout.layoutParams.height = dpToPx(150 , context)
             }
         }
     }
@@ -42,13 +43,19 @@ class ListImageAdapter(context: Context) :RecyclerView.Adapter<ListImageAdapter.
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val imagePath=dataList[position].filename
+        val imagePath=showDataList[position].filename
         Picasso.get().load(imagePath).fit().centerCrop()
             .into(holder.imageview);
 
+        if(showDataList.size>4 && position+1==4){
+            holder.imagetext.visibility=View.VISIBLE
+            holder.imagetext.text="${showDataList.size-4}  more image"
+        }else{
+            holder.imagetext.visibility=View.GONE
+        }
     }
 
     override fun getItemCount(): Int {
-       return if(dataList.size>4) 4 else dataList.size
+       return if(showDataList.size>4) 4 else showDataList.size
     }
 }

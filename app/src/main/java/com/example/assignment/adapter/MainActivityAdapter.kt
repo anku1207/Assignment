@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.assignment.R
@@ -22,6 +23,7 @@ import java.nio.file.Paths.get
 class MainActivityAdapter(val context: Context ,val dataList : ArrayList<GalleryVO>) : RecyclerView.Adapter<MainActivityAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var recyclerView : RecyclerView =itemView.findViewById(R.id.recyclerView)
+        var datetext :TextView =itemView.findViewById(R.id.datetext)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,11 +32,13 @@ class MainActivityAdapter(val context: Context ,val dataList : ArrayList<Gallery
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val galleryDataVO  = dataList[position].GALLERY
-        val listImageAdapter =ListImageAdapter(context,galleryDataVO!!)
+        val listImageAdapter =ListImageAdapter(context,galleryDataVO!! ,galleryDataVO!!)
+        holder.datetext.text="December ${position+1} 201${position+1}"
         holder.recyclerView.apply {
             layoutManager= GridLayoutManager(this.context,if(galleryDataVO.size>2) 2 else galleryDataVO.size)
             adapter=listImageAdapter
         }
+
     }
 
     override fun getItemCount(): Int {

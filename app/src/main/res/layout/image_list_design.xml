@@ -5,10 +5,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/listLayout">
-    <ImageView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/list_image">
-    </ImageView>
+        android:padding="1sp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/list_image"
+            android:src="@drawable/ic_launcher_background">
+        </ImageView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text=""
+            android:gravity="center_vertical|center_horizontal"
+            android:background="#CCA39E9E"
+            android:visibility="gone"
+            android:id="@+id/imagetext"
+            android:textColor="@color/white"
+            />
+
+
+    </RelativeLayout>
+
 
 </LinearLayout>
